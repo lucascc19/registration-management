@@ -3,6 +3,7 @@ import {
   Avatar,
   Divider,
   Drawer,
+  Icon,
   List,
   ListItemButton,
   ListItemIcon,
@@ -11,11 +12,42 @@ import {
   useTheme,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 import { useDrawerContext } from "../../contexts";
 
 interface SidebarProviderProps {
   children: React.ReactNode;
 }
+
+interface IListItemLinkProps {
+  label: string;
+  icon: string;
+  to: string;
+  onClick: (() => void) | undefined;
+}
+
+const ListItemLink: React.FC<IListItemLinkProps> = ({
+  to,
+  icon,
+  label,
+  onClick,
+}) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(to);
+    onClick?.();
+  };
+
+  return (
+    <ListItemButton onClick={handleClick}>
+      <ListItemIcon>
+        <Icon>{icon}</Icon>
+      </ListItemIcon>
+      <ListItemText primary={label} />
+    </ListItemButton>
+  );
+};
 
 export const Sidebar: React.FC<SidebarProviderProps> = ({ children }) => {
   const theme = useTheme();
@@ -50,13 +82,13 @@ export const Sidebar: React.FC<SidebarProviderProps> = ({ children }) => {
           </Box>
           <Divider />
           <Box flex={1}>
-            <List>
-              <ListItemButton>
-                <ListItemIcon>
-                  <Home />
-                </ListItemIcon>
-                <ListItemText primary="Página inicial" />
-              </ListItemButton>
+            <List component="nav">
+              <ListItemLink
+                icon="home"
+                to="/pagina-inicial"
+                label="Página Inicial"
+                onClick={smDown ? toggleDrawerOpen : undefined}
+              />
             </List>
           </Box>
         </Box>

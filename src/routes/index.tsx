@@ -4,14 +4,18 @@ import { useDrawerContext } from "../shared/contexts";
 
 export const AppRoutes = () => {
   const { toggleDrawerOpen } = useDrawerContext();
-  
+
   return (
     <Routes>
       <Route
         path="/pagina-inicial"
         element={
-          <Button variant="contained" color="primary" onClick={toggleDrawerOpen}>
-            Clique aqui
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={toggleDrawerOpen}
+          >
+            Toggle Drawer
           </Button>
         }
       />

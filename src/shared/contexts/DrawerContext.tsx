@@ -5,13 +5,13 @@ import React, {
   useState,
 } from "react";
 
+interface DrawerProviderProps {
+  children: React.ReactNode;
+}
+
 interface IDrawerContextData {
   isDrawerOpen: boolean;
   toggleDrawerOpen: () => void;
-}
-
-interface DrawerProviderProps {
-  children: React.ReactNode;
 }
 
 //ver o curso anterior
@@ -32,7 +32,7 @@ export const DrawerProvider: React.FC<DrawerProviderProps> = ({
   }, []);
 
   return (
-    <DrawerContext.Provider value={{ isDrawerOpen,  toggleDrawerOpen }}>
+    <DrawerContext.Provider value={{ isDrawerOpen, toggleDrawerOpen }}>
       {children}
     </DrawerContext.Provider>
   );
